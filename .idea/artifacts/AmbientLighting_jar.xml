@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="AmbientLighting:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/AmbientLighting_jar</output-path>
+    <root id="archive" name="AmbientLighting.jar">
+      <element id="module-output" name="AmbientLighting" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../RandFiles/Jar Libs/jSerialComm-2.5.3.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
