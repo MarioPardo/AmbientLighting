@@ -1,130 +1,169 @@
-
 #include <FastLED.h>
 
-#define LED_PIN 7
-#define numZones 14
 #define NUM_LEDS 213
+#define LED_PIN 7
+
+#define monitor_start 75 //at which point in the strip the monitor LEDs are 
+#define monitor_end 175
+
+
+//gamma correction table
+const uint8_t PROGMEM gamma8[] = {
+    0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
+    0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  1,  1,  1,
+    1,  1,  1,  1,  1,  1,  1,  1,  1,  2,  2,  2,  2,  2,  2,  2,
+    2,  3,  3,  3,  3,  3,  3,  3,  4,  4,  4,  4,  4,  5,  5,  5,
+    5,  6,  6,  6,  6,  7,  7,  7,  7,  8,  8,  8,  9,  9,  9, 10,
+   10, 10, 11, 11, 11, 12, 12, 13, 13, 13, 14, 14, 15, 15, 16, 16,
+   17, 17, 18, 18, 19, 19, 20, 20, 21, 21, 22, 22, 23, 24, 24, 25,
+   25, 26, 27, 27, 28, 29, 29, 30, 31, 32, 32, 33, 34, 35, 35, 36,
+   37, 38, 39, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 50,
+   51, 52, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 66, 67, 68,
+   69, 70, 72, 73, 74, 75, 77, 78, 79, 81, 82, 83, 85, 86, 87, 89,
+   90, 92, 93, 95, 96, 98, 99,101,102,104,105,107,109,110,112,114,
+  115,117,119,120,122,124,126,127,129,131,133,135,137,138,140,142,
+  144,146,148,150,152,154,156,158,160,162,164,167,169,171,173,175,
+  177,180,182,184,186,189,191,193,196,198,200,203,205,208,210,213,
+  215,218,220,223,225,228,231,233,236,239,241,244,247,249,252,255 };
 
 
 CRGB leds[NUM_LEDS];
 
-int* zones_array[numZones];
+char chars[300];
+int arrIndex = 0;
 
-////individual zones     //space denotes change from monitor to desk zone
-int z1[] = {76, 77, 78, 79, 80, 81    , 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195};
-int z2[] = {82, 83, 84, 85, 86, 87};
-int z3[] = {88, 89, 90, 91, 92, 93     , 196, 196, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212};
-int z4[] = {94, 95, 96, 97, 98, 99, 100, 101};
-int z5[] = {102, 103, 104, 105, 106, 107, 108, 109};
-int z6[] = {110, 111, 112, 113, 114, 115, 116, 117};
-int z7[] = {118, 119, 120, 121, 122, 123, 124, 125};
-int z8[] = {126, 127, 128, 129, 130, 131     , 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
-int z9[] = {132, 133, 134, 135, 136, 137};
-int z10[] = {138, 139, 140, 141, 142, 143    , 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30};
-int z11[] = {144, 145, 146, 147, 148, 149, 150, 151       , 31, 32, 33, 34, 35, 36, 37, 38, 39, 40};
-int z12[] =  {152, 153, 154, 155, 156, 157, 158, 159      , 41, 42, 43, 44, 45, 46, 47, 48, 49, 50};
-int z13[] =  {160, 161, 162, 163, 164, 165, 166, 167      , 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62};
-int z14[] =  {168, 169, 170, 171, 172, 173, 174, 175      , 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75};
-
-int zone_sizes[] = {26, 6, 23  , 8, 8, 8, 8   , 21, 6, 6, 12   , 18, 18, 20, 21};
-
-
-String stringKey = "AAAAAA";
 boolean on = true;
-
- 
 
 void setup()
 {
   FastLED.addLeds<WS2812, LED_PIN, GRB> (leds, NUM_LEDS);
-  mapArrays();
-
-
-  Serial.begin(1000000);
+  FastLED.setBrightness(255);
+  
+  Serial.begin(115200);
   Serial.flush();
+  delay(1000);
 }
 
 void loop()
 {
   readSerial();
+  //copyToDesk();
+
+
 
 }
 
 
-///////functions
 void readSerial()
 {
-
-
-
+  
   if (Serial.available() > 0)
   {
-    char c =  Serial.read();
+    char c = Serial.read();
 
-    if (c == ',')
+ 
+    if (c == '-') //if its off, turn off and return
     {
-      setStrip();
-    }
-    else
-    {
-      stringKey += c;
+      Serial.println("OFF");
+      on = false;
+      turnOff();
+      return;
     }
 
+    if (c == '<') //if it's the beginning symbol
+      {
+        on = true;
+        clearArray();
+        arrIndex = 0;
+      }
 
-  }
+       else if ( c == '>') //terminating character
+      {
+        setStrip();
+      }
+      else if (c != '\n')
+      {
+        chars[arrIndex] = c;
+        arrIndex++;
+      }
+
+    }
+  
+
+
+  
+
 
 }
 
 
 void setStrip()
 {
+  int ledNum = 0;
+  for (int i = 0 ; i < 300; i += 3)
+  {
+    int r = charToNumber(chars[i]);
+    r = pgm_read_byte(&gamma8[r]);
+    int g = charToNumber(chars[i + 1]);
+    g = pgm_read_byte(&gamma8[g]);
+    int b = charToNumber(chars[i + 2]);
+    b = pgm_read_byte(&gamma8[b]);
+      
+    leds[ledNum + monitor_start].setRGB(r,g,b);
+     
+    ledNum++;
+  }
 
+  FastLED.show();
+}
 
-  AmbientMode();
-
-
-  stringKey = "";
+void turnOff()
+{
+   for (int i = 0; i < NUM_LEDS; i++)
+  {
+    leds[i].setRGB(0,0,0);
+  }
   FastLED.show();
 }
 
 
 
-
-////light modes
-
-void AmbientMode()
+void copyToDesk()
 {
-  int section = 0;
-  char letters[stringKey.length() + 1];
-  stringKey.toCharArray(letters, stringKey.length() + 1);
-
-
-
-  for (int i = 0; i < strlen(letters); i += 3)
+  //copies right side top right
+  for(int i = monitor_start; i < monitor_start + 18; i++)
   {
-    int r = charToNumber(letters[i]);
-    int g = charToNumber(letters[i + 1]);
-    int b = charToNumber(letters[i + 2]);
+    int r = leds[i].r; int g = leds[i].g; int b = leds[i].b;
 
-    int* currArray;
-    currArray = zones_array[section];
-
-    for (int j = 0; j < zone_sizes[section]; j++)
-    {
-      leds[ currArray[j] ].setRGB(r, g, b);
-    }
-    section++;
+    
   }
+  // right side bottom right
 
+  //bottom right side
 
+  //bottom middle right
+
+   //bottom middle left
+
+   //bottom left side
+
+   //left side bottom left
+
+   //left side top left
+
+   
+}
+
+void clearArray()
+{
+  for (int i = 0; i < 300; i++)
+  {
+    chars[i] = 0;
+  }
 }
 
 
 
-
-
-
-////////////
 
 int charToNumber(char x)
 {
@@ -234,33 +273,6 @@ int charToNumber(char x)
 
 
   return 'A';
-
-}
-
-
-void mapArrays()
-{
-  //left of screen
-  zones_array[0] = z1;
-  zones_array[1] = z2;
-  zones_array[2] = z3;
-
-  //top of screen
-  zones_array[3] = z4;
-  zones_array[4] = z5;
-  zones_array[5] = z6;
-  zones_array[6] = z7;
-
-  //right of screen
-  zones_array[7] = z8;
-  zones_array[8] = z9;
-  zones_array[9] = z10;
-
-  //bottom of screen
-  zones_array[10] = z11;
-  zones_array[11] = z12;
-  zones_array[12] = z13;
-  zones_array[13] = z14;
 
 }
 

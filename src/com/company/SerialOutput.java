@@ -34,6 +34,8 @@ public class SerialOutput
             System.out.println("Connected to:" + chosenPort.getSystemPortName());
 
             output = new PrintWriter(chosenPort.getOutputStream());
+            output.flush(); //seems to fix reliability issues, clears output for incase program got stopped when it was full
+
             SerialThread = new Thread() {
                 @Override
                 public void run() {
@@ -60,6 +62,11 @@ public class SerialOutput
                                      case "Static":
                                          Main.stripManager.setStatic();
                                          break;
+
+                                     default:
+                                         Main.screenSampler.sampleScreen();
+                                         break;
+
 
                                  }
 
