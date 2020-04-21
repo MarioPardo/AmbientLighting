@@ -15,8 +15,8 @@ public class ScreenSampler
 
     static int xrectres = xres - (2*padding);
     static int yrectres = yres - (2*padding);
-    static int sectionwidth = (xrectres/xsections)/4;
-    static int sectionheight = (yrectres/ysections)/4;
+    static int sectionwidth = (xrectres/xsections);
+    static int sectionheight = (yrectres/ysections);
 
 
     static Robot robot;
@@ -46,8 +46,12 @@ public class ScreenSampler
 
         screen = robot.createScreenCapture(screenRect);
 
-        ////////////////////////////scans left side  from bottom to top
         currentString.append('<');
+        Main.serial.output.print(currentString.toString());
+        Main.serial.output.flush();
+
+        ////////////////////////////scans left side  from bottom to top
+        currentString = new StringBuilder();
         for(int i = 0; i < ysections ; i++) //for each y sectoin
         {
             long RVal = 0;
@@ -56,16 +60,20 @@ public class ScreenSampler
 
             for (int y = (yrectres ) - (i * sectionheight) ; y > yrectres - ((i + 1) * sectionheight) ; y--) //for each pixel row
             {
-                for (int x = 0; x <= sectionwidth ; x++) //for each each pixel in the column
+                for (int x = 0; x <sectionwidth ; x++) //for each each pixel in the column
                 {
                     Color color = new Color(screen.getRGB(x, y));
                     RVal += color.getRed();
                     GVal += color.getGreen();
                     BVal += color.getBlue();
+
+                    //System.out.println("X:" + x + "  Y:" + y + "     R:" + color.getRed() + " G:" +color.getGreen()+ " B:" + color.getBlue());
                 }
             }
+            //System.out.println("RVAL :" + RVal);
           addToString(RVal,GVal,BVal);
         }
+
         Main.serial.output.print(currentString.toString());
         Main.serial.output.flush();
 
@@ -87,6 +95,7 @@ public class ScreenSampler
                     RVal += color.getRed();
                     GVal += color.getGreen();
                     BVal += color.getBlue();
+                    
                 }
             }
             addToString(RVal,GVal,BVal);
@@ -285,7 +294,6 @@ public class ScreenSampler
 
     public void addToString(long RVal, long GVal, long BVal)
     {
-
         int avgRed =(int) RVal / ((sectionheight * sectionwidth));
         currentString.append(convertToChar(avgRed));
 
