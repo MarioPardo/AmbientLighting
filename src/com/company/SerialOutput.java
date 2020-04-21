@@ -17,7 +17,8 @@ public class SerialOutput
 
     static boolean isOn = true;
 
-    public SerialOutput() {
+    public SerialOutput()
+    {
 
         sb = new StringBuilder();
         portsList = SerialPort.getCommPorts();
@@ -42,16 +43,25 @@ public class SerialOutput
                          while (true)
                          {
 
-                             if(isOn)
+                             if(!isOn)
                              {
-                                Main.screenSampler.sampleScreen();
+                                 output.print("-");
+                                 output.flush();
                              }
+                             else
+                                 {
 
-                             else //if its off
-                             {
-                                
-                                output.print("-");
-                                output.flush();
+                                 switch ((String) Main.menuController.modePicker.getValue())
+                                 {
+                                     case "Ambient":
+                                         Main.screenSampler.sampleScreen();
+                                         break;
+
+                                     case "Static":
+                                         Main.stripManager.setStatic();
+                                         break;
+
+                                 }
 
                              }
 

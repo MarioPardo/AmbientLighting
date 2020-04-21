@@ -21,6 +21,7 @@ public class Main extends Application
     //objects
     static SerialOutput serial;
     static ScreenSampler screenSampler;
+    static stripManager stripManager;
 
     //this is boiler plate javafx stuff for making the screen
     static Stage stage;
@@ -52,6 +53,7 @@ public class Main extends Application
 
 
         //initialize objects
+        stripManager = new stripManager();
         screenSampler = new ScreenSampler();
         serial = new SerialOutput();
 

@@ -3,6 +3,8 @@ package com.company;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -20,9 +22,12 @@ public class MenuController implements Initializable
     @FXML
     public Button OnOffButton;
 
+    @FXML
+    public ChoiceBox modePicker;
 
     @FXML
-    public ImageView imgView;
+    public ColorPicker colorPicker;
+
 
 
 
@@ -37,13 +42,17 @@ public class MenuController implements Initializable
 
     public void init()
     {
-
-        System.out.println("Menu COntrol init");
-
+        //sets the on/off button image
         ImageView onImage = new ImageView(new Image(new File("OtherFiles/OnButton.jpg").toURI().toString()));
         onImage.setFitHeight(50);
         onImage.setFitWidth(50);
         OnOffButton.setGraphic(onImage);
+
+        modePicker.getItems().add("Ambient");
+        modePicker.getItems().add("Static");
+        modePicker.setValue("Ambient");
+
+
 
 
 
