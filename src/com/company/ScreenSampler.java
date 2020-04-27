@@ -58,22 +58,20 @@ public class ScreenSampler
             long GVal = 0;
             long BVal = 0;
 
-            for (int y = (yrectres ) - (i * sectionheight) ; y > yrectres - ((i + 1) * sectionheight) ; y--) //for each pixel row
+            for (int y = (yrectres ) - (i * sectionheight) ; y > yrectres - ((i + 1) * sectionheight) ; y-=4) //for each pixel row
             {
-                for (int x = 0; x <sectionwidth ; x++) //for each each pixel in the column
+                for (int x = 0; x <sectionwidth ; x+=4) //for each each pixel in the column
                 {
                     Color color = new Color(screen.getRGB(x, y));
                     RVal += color.getRed();
                     GVal += color.getGreen();
                     BVal += color.getBlue();
 
-                    //System.out.println("X:" + x + "  Y:" + y + "     R:" + color.getRed() + " G:" +color.getGreen()+ " B:" + color.getBlue());
                 }
             }
-            //System.out.println("RVAL :" + RVal);
           addToString(RVal,GVal,BVal);
         }
-
+        System.out.println(currentString.toString());
         Main.serial.output.print(currentString.toString());
         Main.serial.output.flush();
 
@@ -87,15 +85,15 @@ public class ScreenSampler
             long GVal = 0;
             long BVal = 0;
 
-            for(int x =  (i * sectionwidth) ; x <  ((i+ 1) * sectionwidth); x++) //for each pixel column
+            for(int x =  (i * sectionwidth) ; x <  ((i+ 1) * sectionwidth); x+=4) //for each pixel column
             {
-                for(int y = 0; y < sectionheight; y++)
+                for(int y = 0; y < sectionheight; y+=4)
                 {
                     Color color = new Color(screen.getRGB(x, y));
                     RVal += color.getRed();
                     GVal += color.getGreen();
                     BVal += color.getBlue();
-                    
+
                 }
             }
             addToString(RVal,GVal,BVal);
@@ -118,9 +116,9 @@ public class ScreenSampler
             long BVal = 0;
 
 
-            for(int y = (i* sectionheight); y < ((i+1) * sectionheight); y++ ) //for each pixel row
+            for(int y = (i* sectionheight); y < ((i+1) * sectionheight); y+=4 ) //for each pixel row
             {
-                for(int x = (xrectres - sectionwidth); x < xrectres; x++)
+                for(int x = (xrectres - sectionwidth); x < xrectres; x+=4)
                 {
                     Color color = new Color(screen.getRGB(x, y));
                     RVal += color.getRed();
@@ -145,9 +143,9 @@ public class ScreenSampler
             long BVal = 0;
 
 
-            for(int x = (xrectres-1) - (i * sectionwidth)  ; x > xrectres - ((i+1)  * sectionwidth); x--) //for each column
+            for(int x = (xrectres-1) - (i * sectionwidth)  ; x > xrectres - ((i+1)  * sectionwidth); x-=4) //for each column
             {
-                for(int y = (yrectres - sectionheight); y < yrectres; y++)
+                for(int y = (yrectres - sectionheight); y < yrectres; y+=4)
                 {
                     Color color = new Color(screen.getRGB(x, y));
 
@@ -295,12 +293,15 @@ public class ScreenSampler
     public void addToString(long RVal, long GVal, long BVal)
     {
         int avgRed =(int) RVal / ((sectionheight * sectionwidth));
+        avgRed *= 16; //scanning 14 times less pixels
         currentString.append(convertToChar(avgRed));
 
         int avgGreen =(int) GVal / (sectionheight * sectionwidth);
+        avgGreen*=16;
         currentString.append(convertToChar(avgGreen));
 
         int avgBlue = (int) BVal / (sectionheight * sectionwidth) ;
+        avgBlue*= 16;
         currentString.append(convertToChar(avgBlue));
     }
 

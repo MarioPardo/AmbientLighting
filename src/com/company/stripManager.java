@@ -13,6 +13,13 @@ public class stripManager
 
     public void setStatic()
     {
+        try {
+            Thread.sleep(1000);  //less cpu load
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+
         Color color;
         color = Main.menuController.colorPicker.getValue();
 
