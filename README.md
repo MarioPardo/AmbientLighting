@@ -2,7 +2,7 @@
  My version of Ambilight! Using Java and Arduino
 
 TODO
-* Rainbow Mode
+* Rainbow Speed Slider
 * Properly close when x clicked
 * Store custom colors
 
