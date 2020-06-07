@@ -137,6 +137,11 @@ void rainbow()
         if(hue % 12 == 0) hue = 1;
             
       leds[i] = CHSV(hue * 30, 255, 255); 
+      i++;
+      leds[i] = CHSV(hue * 30, 255, 255); 
+      i++;
+      leds[i] = CHSV(hue * 30, 255, 255); 
+      
       hue ++;
      }
    FastLED.show();

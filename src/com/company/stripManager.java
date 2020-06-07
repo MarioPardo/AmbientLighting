@@ -68,7 +68,7 @@ public class stripManager
     {
 
         try {
-            Thread.sleep(200);
+            Thread.sleep(100);
         }
         catch(Exception e) {
             e.printStackTrace();

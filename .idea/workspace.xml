@@ -11,9 +11,7 @@
   <component name="ChangeListManager">
     <list default="true" id="cc2fa823-f05a-4912-a8a5-e3c1c69e3748" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/AmbientLightingArduino/AmbientLightingArduino.ino" beforeDir="false" afterPath="$PROJECT_DIR$/AmbientLightingArduino/AmbientLightingArduino.ino" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/MenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/ScreenSampler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/ScreenSampler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/SerialOutput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/SerialOutput.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OtherFiles/Ambient.exe" beforeDir="false" afterPath="$PROJECT_DIR$/OtherFiles/Ambient.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/stripManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/stripManager.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -47,7 +45,7 @@
           <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/company/MenuController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="120">
@@ -80,11 +78,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/stripManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="475">
-              <caret line="72" column="28" lean-forward="true" selection-start-line="72" selection-start-column="28" selection-end-line="72" selection-end-column="28" />
+            <state relative-caret-position="435">
+              <caret line="70" column="27" selection-start-line="70" selection-start-column="27" selection-end-line="70" selection-end-column="27" />
             </state>
           </provider>
         </entry>
@@ -124,7 +122,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-9" />
     <option name="y" value="-9" />
     <option name="width" value="1375" />
@@ -219,10 +217,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="3086" height="1702" extended-state="6" />
+    <frame x="1190" y="202" width="1100" height="840" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13216145" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.37384897" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -231,7 +229,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.45825487" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.95896035" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39987445" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -307,16 +305,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/MenuController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="27" column="9" lean-forward="true" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/SerialOutput.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-45">
@@ -326,8 +314,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/stripManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
-          <caret line="72" column="28" lean-forward="true" selection-start-line="72" selection-start-column="28" selection-end-line="72" selection-end-column="28" />
+        <state relative-caret-position="435">
+          <caret line="70" column="27" selection-start-line="70" selection-start-column="27" selection-end-line="70" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/MenuController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="27" column="9" lean-forward="true" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
