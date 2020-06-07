@@ -63,6 +63,10 @@ public class SerialOutput
                                          Main.stripManager.setStatic();
                                          break;
 
+                                     case "Rainbow":
+                                         Main.stripManager.setRainbow();
+                                         break;
+
                                      default:
                                          Main.screenSampler.sampleScreen();
                                          break;

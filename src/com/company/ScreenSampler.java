@@ -71,7 +71,7 @@ public class ScreenSampler
             }
           addToString(RVal,GVal,BVal);
         }
-        System.out.println(currentString.toString());
+
         Main.serial.output.print(currentString.toString());
         Main.serial.output.flush();
 

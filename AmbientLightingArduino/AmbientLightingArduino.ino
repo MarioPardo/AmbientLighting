@@ -32,6 +32,8 @@ CRGB leds[NUM_LEDS];
 
 char chars[300];
 int arrIndex = 0;
+boolean initialSet = false;
+
 
 boolean on = true;
 
@@ -49,9 +51,6 @@ void loop()
 {
   readSerial();
 
-
-
-
 }
 
 
@@ -65,21 +64,30 @@ void readSerial()
 
     if (c == '-') //if its off, turn off and return
     {
-      Serial.println("OFF");
       on = false;
       turnOff();
+      initialSet = false;
       return;
     }
+
+     if (c == '$') 
+    {
+      rainbow();
+      return;
+    }
+
 
     if (c == '<') //if it's the beginning symbol
     {
       on = true;
+      initialSet = false;
       clearArray();
       arrIndex = 0;
     }
 
     else if ( c == '>') //terminating character
     {
+      initialSet = false;
       setStrip();
     }
     else if (c != '\n')
@@ -117,6 +125,55 @@ void setStrip()
 
   copyToDesk();
   FastLED.show();
+}
+
+void rainbow()
+{
+  if(initialSet == false) //sets the leds as rainbow for the initial time
+  {
+      int hue = 1;
+     for(int i = 0; i < NUM_LEDS; i++)
+     {
+        if(hue % 12 == 0) hue = 1;
+            
+      leds[i] = CHSV(hue * 30, 255, 255); 
+      hue ++;
+     }
+   FastLED.show();
+   initialSet = true;
+   delay(25);
+  }
+  else // if was already set, move the rainbow
+  {
+     for(int i = NUM_LEDS; i >=0; i--)
+     {
+
+      if( i == 0)
+      {
+      leds[i].r = leds[NUM_LEDS - 1].r;
+      leds[i].g = leds[NUM_LEDS -1 ].g;
+      leds[i].b = leds[NUM_LEDS - 1].b; 
+      }
+      else
+      {    
+      leds[i].r = leds[i-1].r;
+      leds[i].g = leds[i-1].g;
+      leds[i].b = leds[i-1].b;
+      }
+  
+      
+     }
+     delay(5);
+
+     FastLED.show();
+     
+  }
+
+  
+
+  
+  
+  
 }
 
 void turnOff()

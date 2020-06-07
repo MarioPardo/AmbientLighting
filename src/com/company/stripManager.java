@@ -64,4 +64,21 @@ public class stripManager
 
     }
 
+    public void setRainbow()
+    {
+
+        try {
+            Thread.sleep(200);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        Main.serial.output.flush();
+        Main.serial.output.print('$');
+        Main.serial.output.print('$');
+        Main.serial.output.print('$');
+        Main.serial.output.flush();
+    }
+
 }

@@ -50,7 +50,8 @@ public class MenuController implements Initializable
 
         modePicker.getItems().add("Ambient");
         modePicker.getItems().add("Static");
-        modePicker.setValue("Ambient");
+        modePicker.getItems().add("Rainbow");
+        modePicker.setValue("Static");
 
 
 
