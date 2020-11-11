@@ -23,7 +23,7 @@ public class SerialOutput
         sb = new StringBuilder();
         portsList = SerialPort.getCommPorts();
 
-        chosenPort = SerialPort.getCommPort("COM8");
+        chosenPort = SerialPort.getCommPort("COM4");
         chosenPort.setComPortTimeouts(SerialPort.TIMEOUT_SCANNER, 0, 0);
         chosenPort.setBaudRate(1000000);
 
