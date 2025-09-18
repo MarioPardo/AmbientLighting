@@ -1,13 +1,8 @@
 # MyAmbientLighting
- My version of Ambilight! Using Java and Arduino
+ My version of Ambilight! Using Java and Arduinos
 
-Refer to the ShowcaseVideo.mp4 in /otherFiles to see it in action!
-or Here's the google drive link! 
-https://drive.google.com/file/d/1TyfQbS3d5oWRBt0bDDgeMdsUwlfx4n3n/view?usp=sharing
+[Showcase Video](https://drive.google.com/file/d/1nMzceoJf59IeHXzoKonG_clAGjr08a5E/view?usp=sharing)
 
-TODO
-* Rainbow Speed Slider
-* Properly close when x clicked
-* Store custom colors
+I wanted cool lights for my computer, it was a great opportunity for a hardware + software project.
 
 If you have any questions, feel free to email me!
